@@ -1,0 +1,70 @@
+import agenciaDeViajes.*
+describe " Tests sobre pack nacionales y sus beneficios"{
+
+ test "un pack nacional sin beneficios vigentes" {
+    const coordinador = new Coordinador(
+        cantidadDeViajesQueHizo = 0,
+        estaMotivado = true,
+        añosDeExperiencia = 1,
+        rol = "Guia"
+    )
+
+    const pack = new PacksNacionales(
+        precioBase = 100,
+        duracion = 5,
+        coordinadorACargo = coordinador,
+        beneficios = [],
+        provinciaDeDestino = "Buenos Aires"
+    )
+
+    assert.equals(100, pack.valorFinal())
+}
+test "un pack nacional con 2 beneficios vigentes" {
+    const coordinador = new Coordinador(
+        cantidadDeViajesQueHizo = 0,
+        estaMotivado = true,
+        añosDeExperiencia = 1,
+        rol = "Guia"
+    )
+
+    const beneficioUno = new Beneficios(
+        tipo = "Acceso a salas VIP",
+        costo = 10,
+        estaVigente = true
+    )
+    const beneficioDos = new Beneficios(
+        tipo = "Seguro adicional",
+        costo = 10,
+        estaVigente = true
+    )
+
+    const packDos = new PacksNacionales(
+        precioBase = 100,
+        duracion = 5,
+        coordinadorACargo = coordinador,
+        beneficios = [beneficioUno, beneficioDos],
+        provinciaDeDestino = "Buenos Aires"
+    )
+
+    assert.equals(120, packDos.valorFinal())
+}
+test "un pack internacional sin beneficios vigentes" {
+        const coordinador = new Coordinador(
+        cantidadDeViajesQueHizo = 0,
+        estaMotivado = true,
+        añosDeExperiencia = 1,
+        rol = "Guia"
+    )
+    const packInternacional = new PacksInternacionales(
+    precioBase = 100,
+    duracion = 5,
+    coordinadorACargo = coordinador,
+    beneficios = [],
+    paisDeDestino = "Buenos Aires",
+    escalasQueSeHaran = 5,
+    esLugarDeInteres = true
+)
+
+    assert.equals(120, packInternacional.valorFinal())
+}
+}
